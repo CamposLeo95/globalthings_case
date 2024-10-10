@@ -65,12 +65,13 @@ export default function ModalAdminCategory() {
 		},
 	});
 
+	const handleClose = () => {
+		setIsModalCategoryVisible(false);
+	};
+
 	return (
 		<>
-			<Dialog
-				open={isModalCategoryVisible}
-				onOpenChange={setIsModalCategoryVisible}
-			>
+			<Dialog open={isModalCategoryVisible} onOpenChange={handleClose}>
 				<DialogContent>
 					<DialogHeader>
 						<DialogTitle>Categorias</DialogTitle>
@@ -121,6 +122,9 @@ export default function ModalAdminCategory() {
 						</Table>
 					</div>
 					<DialogFooter>
+						<Button size={"sm"} variant="outline" onClick={handleClose}>
+							Fechar
+						</Button>
 						<Button
 							size={"sm"}
 							className="hover:bg-primary_hover"

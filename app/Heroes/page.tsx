@@ -107,9 +107,9 @@ export default function Heroes() {
 	return (
 		<>
 			<div>
-				<div className="w-full p-1 rounded-sm space-x-3">
+				<div className="w-full p-1 rounded-sm  md:px-0">
 					<Button
-						className="bg-orange-400 hover:bg-orange-500"
+						className="bg-orange-400 hover:bg-orange-500 w-full my-2 rounded-sm shadow-md md:w-[150px] md:px-0"
 						onClick={handleCreate}
 					>
 						Criar Herói
@@ -127,13 +127,19 @@ export default function Heroes() {
 							<Skeleton className="w-full h-[60px] " />
 						</div>
 					) : (
-						<Table className="border-2">
+						<Table className="border-[1px] border-primary">
 							<TableCaption>Lista de Heróis</TableCaption>
-							<TableHeader>
-								<TableRow>
-									<TableHead className="w-[100px]">Hero</TableHead>
-									<TableHead>Status</TableHead>
-									<TableHead>Categoria</TableHead>
+							<TableHeader className="bg-primary text-white">
+								<TableRow className="">
+									<TableHead className="w-[50px] text-white font-bold">
+										Herói
+									</TableHead>
+									<TableHead className=" text-white font-bold text-center">
+										Status
+									</TableHead>
+									<TableHead className=" text-white font-bold">
+										Categoria
+									</TableHead>
 									<TableHead className="text-right"> </TableHead>
 								</TableRow>
 							</TableHeader>
@@ -144,7 +150,7 @@ export default function Heroes() {
 											{hero.Name}
 										</TableCell>
 										<TableCell className="text-center">
-											{hero.Active ? "✅" : "-"}
+											{hero.Active ? "✅" : "❌"}
 										</TableCell>
 										<TableCell>{hero.Category.Name}</TableCell>
 										<TableCell className="flex gap-1 justify-end">
@@ -179,10 +185,13 @@ export default function Heroes() {
 				<Pagination>
 					<PaginationContent>
 						<PaginationItem>
-							<PaginationPrevious
+							<Button
 								onClick={handlePreviousPage}
-								className="cursor-pointer"
-							/>
+								className="cursor-pointer hover:bg-primary_hover"
+								disabled={pagination.page <= 1}
+							>
+								Anterior
+							</Button>
 						</PaginationItem>
 						<PaginationItem>
 							<PaginationLink href="#">{pagination.page}</PaginationLink>
@@ -191,10 +200,18 @@ export default function Heroes() {
 							<PaginationEllipsis />
 						</PaginationItem>
 						<PaginationItem>
-							<PaginationNext
+							<Button
 								onClick={handleNextPage}
-								className="cursor-pointer"
-							/>
+								className="cursor-pointer hover:bg-primary_hover"
+								disabled={
+									heroes?.data?.Total
+										? heroes?.data?.Total <= pagination.page * pagination.limit
+										: true
+								}
+							>
+								{" "}
+								Próximo
+							</Button>
 						</PaginationItem>
 					</PaginationContent>
 				</Pagination>
