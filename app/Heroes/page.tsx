@@ -194,10 +194,23 @@ export default function Heroes() {
 							</Button>
 						</PaginationItem>
 						<PaginationItem>
+							{heroes?.data?.Total &&
+							heroes?.data?.Total <= pagination.page * pagination.limit ? (
+								<PaginationEllipsis />
+							) : (
+								false
+							)}
+						</PaginationItem>
+						<PaginationItem>
 							<PaginationLink href="#">{pagination.page}</PaginationLink>
 						</PaginationItem>
 						<PaginationItem>
-							<PaginationEllipsis />
+							{heroes?.data?.Total &&
+							heroes?.data?.Total <= pagination.page * pagination.limit ? (
+								false
+							) : (
+								<PaginationEllipsis />
+							)}
 						</PaginationItem>
 						<PaginationItem>
 							<Button
@@ -206,7 +219,7 @@ export default function Heroes() {
 								disabled={
 									heroes?.data?.Total
 										? heroes?.data?.Total <= pagination.page * pagination.limit
-										: true
+										: false
 								}
 							>
 								{" "}
